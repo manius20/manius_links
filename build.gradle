@@ -14,12 +14,12 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:26.2-R0.1-SNAPSHOT' // Dostosuj do dokładnej wersji Paper 26.2
+    compileOnly 'io.papermc.paper:paper-api:26.2-R0.1-SNAPSHOT'
 }
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21) // Paper 26.2 wymaga Javy 21
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
