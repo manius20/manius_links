@@ -1,10 +1,6 @@
-# Konfiguracja komend społecznościowych dla S16 SMP
-# Możesz dodawać nowe komendy według poniższego wzoru!
-
+# Konfiguracja komend społecznościowych
 commands:
   dc:
     message: "&b&lDISCORD &8» &7Zapraszamy na naszego Discorda: &ehttps://discord.gg/aAtDAXufUH"
   yt:
     message: "&c&lYOUTUBE &8» &7Sprawdź nasz kanał YouTube: &ehttps://youtube.com/@twojkanal"
-  tiktok:
-    message: "&d&lTIKTOK &8» &7Obserwuj nas na TikToku: &ehttps://tiktok.com/@twojkonto"
