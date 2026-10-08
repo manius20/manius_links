@@ -1,6 +1,10 @@
 # Konfiguracja komend społecznościowych
 commands:
   dc:
-    message: "&b&lDISCORD &8» &7Zapraszamy na naszego Discorda: &ehttps://discord.gg/aAtDAXufUH"
+    prefix: "&b&lDISCORD &8» &7Zapraszamy na naszego Discorda: "
+    url: "https://discord.gg/aAtDAXufUH"
+    hover: "&eKliknij, aby dołączyć do Discorda!"
   yt:
-    message: "&c&lYOUTUBE &8» &7Sprawdź nasz kanał YouTube: &ehttps://youtube.com/@twojkanal"
+    prefix: "&c&lYOUTUBE &8» &7Sprawdź nasz kanał YouTube: "
+    url: "https://youtube.com/@twojkanal"
+    hover: "&eKliknij, aby otworzyć YouTube!"
