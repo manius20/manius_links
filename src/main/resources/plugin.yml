@@ -1,0 +1,5 @@
+name: manius_links
+version: 1.0.0
+main: com.s16.socials.SocialPlugin
+api-version: '26.2'
+commands:
