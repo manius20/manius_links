@@ -4,7 +4,6 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,49 +17,31 @@ public final class SocialPlugin extends JavaPlugin implements CommandExecutor {
     public void onEnable() {
         saveDefaultConfig();
         
-        ConfigurationSection cmdsSection = getConfig().getConfigurationSection("commands");
-        if (cmdsSection != null) {
-            for (String key : cmdsSection.getKeys(false)) {
+        ConfigurationSection cmds = getConfig().getConfigurationSection("commands");
+        if (cmds != null) {
+            for (String key : cmds.getKeys(false)) {
                 if (getCommand(key) != null) {
                     getCommand(key).setExecutor(this);
                 }
             }
         }
-        
-        getLogger().info("S16Socials zostal pomyslnie wlaczony!");
+        getLogger().info("S16Socials włączony pomyślnie!");
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        String cmdName = command.getName().toLowerCase();
-        
-        String prefixPath = "commands." + cmdName + ".prefix";
-        String urlPath = "commands." + cmdName + ".url";
-        String hoverPath = "commands." + cmdName + ".hover";
+        String name = command.getName().toLowerCase();
+        String prefix = getConfig().getString("commands." + name + ".prefix", "&7Link: ");
+        String url = getConfig().getString("commands." + name + ".url", "https://discord.gg/aAtDAXufUH");
+        String hover = getConfig().getString("commands." + name + ".hover", "&eKliknij, aby otworzyć!");
 
-        if (getConfig().contains(urlPath)) {
-            String prefixText = getConfig().getString(prefixPath, "&7Link: ");
-            String url = getConfig().getString(urlPath, "https://discord.gg/aAtDAXufUH");
-            String hoverText = getConfig().getString(hoverPath, "&eKliknij, aby otworzyć w przeglądarce!");
+        Component msg = LegacyComponentSerializer.legacy('&').deserialize(prefix)
+                .append(Component.text(url)
+                        .color(NamedTextColor.AQUA)
+                        .clickEvent(ClickEvent.openUrl(url))
+                        .hoverEvent(HoverEvent.showText(LegacyComponentSerializer.legacy('&').deserialize(hover))));
 
-            // Konwersja kolorów z tradycyjnego kodu & na format Adventure
-            Component prefix = LegacyComponentSerializer.legacy('&').deserialize(prefixText);
-            
-            // Stworzenie klikalnego linku
-            Component linkComponent = Component.text(url)
-                    .color(NamedTextColor.AQUA)
-                    .decorate(TextDecoration.UNDERLINED)
-                    .clickEvent(ClickEvent.openUrl(url))
-                    .hoverEvent(HoverEvent.showText(LegacyComponentSerializer.legacy('&').deserialize(hoverText)));
-
-            // Połączenie całości w jedną wiadomość
-            Component finalMessage = prefix.append(linkComponent);
-            
-            sender.sendMessage(finalMessage);
-            return true;
-        }
-
-        sender.sendMessage(Component.text("Ta komenda nie jest skonfigurowana.", NamedTextColor.RED));
+        sender.sendMessage(msg);
         return true;
     }
 }
