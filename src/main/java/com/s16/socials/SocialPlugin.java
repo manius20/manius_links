@@ -8,8 +8,6 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Map;
-
 public final class SocialPlugin extends JavaPlugin implements CommandExecutor {
 
     @Override
@@ -33,8 +31,6 @@ public final class SocialPlugin extends JavaPlugin implements CommandExecutor {
             PluginCommand command = getCommand(key);
             if (command != null) {
                 command.setExecutor(this);
-            } else {
-                getLogger().warning("Komenda /" + key + " jest zdefiniowana w config.yml, ale brakuje jej w rejestrze! (To normalne przy pierwszym starcie lub wymaga aktualizacji)");
             }
         }
     }
@@ -45,12 +41,12 @@ public final class SocialPlugin extends JavaPlugin implements CommandExecutor {
         String messagePath = "commands." + cmdName + ".message";
 
         if (getConfig().contains(messagePath)) {
-            String rawMessage = getConfig().getString(messagePath, "&cBrak wiadomości w configu.");
+            String rawMessage = getConfig().getString(messagePath, "&cBrak wiadomości.");
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&', rawMessage));
             return true;
         }
 
-        sender.sendMessage(ChatColor.RED + "Ta komenda nie jest poprawnie skonfigurowana.");
+        sender.sendMessage(ChatColor.RED + "Ta komenda nie jest skonfigurowana.");
         return true;
     }
 }
