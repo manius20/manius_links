@@ -20,8 +20,8 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
 
-    - name: Install Gradle
-      run: sudo apt-get update && sudo apt-get install -y gradle
+    - name: Set up Gradle
+      uses: gradle/actions/setup-gradle@v3
 
     - name: Build with Gradle
       run: gradle build --no-daemon
