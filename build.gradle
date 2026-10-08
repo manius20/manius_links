@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.s16.socials'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "papermc"
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+}
+
+dependencies {
+    compileOnly 'io.papermc.paper:paper-api:26.2-R0.1-SNAPSHOT' // Dostosuj do dokładnej wersji Paper 26.2
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21) // Paper 26.2 wymaga Javy 21
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
